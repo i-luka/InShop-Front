@@ -45,7 +45,7 @@ let app = new Vue({
                 .then(result => result.json())
                 .catch(error => {
                     // console.log(error);
-                    this.$refs.error.setError(error);
+                    //this.$refs.error.setError(error);
                 })
         },
         putJson(url, data){
@@ -59,7 +59,7 @@ let app = new Vue({
                 .then(result => result.json())
                 .catch(error => {
                     // console.log(error);
-                    this.$refs.error.setError(error);
+                    //this.$refs.error.setError(error);
                 })
         },
         delJson(url, data){
@@ -109,6 +109,7 @@ let app = new Vue({
                         }else{
 
                             item.quantity--;
+                            this.amount
                         }
                     }
                 })
@@ -133,7 +134,7 @@ let app = new Vue({
                 // this.cartItems = Object.assign({}, data);
                 this.cartItems = data.contents;
                 this.amount = data.amount;
-                this.goodsCount = data.goodsCount;
+                this.goodsCount = data.countGoods;
             });
 
     },
@@ -172,7 +173,9 @@ let app = new Vue({
                         </g>
                     </svg>
                 </a>
-                
+                <div class="circle-point">
+                    {{ goodsCount }}
+                </div>
                 <div class="drop-box-cart drop-box-account  drop-box-romb-cart"
                         v-show="showCart">
                     <!--<div class="drop-flex-cart" -->
