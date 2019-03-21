@@ -92,6 +92,7 @@ let app = new Vue({
                     .then(data => {
                         if(data.result === 1){
                             this.cartItems.push(prod);
+                            this.goodsCount++
                         }
                     })
             }
@@ -106,10 +107,11 @@ let app = new Vue({
 
                             let index = this.cartItems.findIndex(el => el.id_product === item.id_product);
                             this.cartItems.splice(index, 1);
+                            this.goodsCount--
                         }else{
 
                             item.quantity--;
-                            this.amount
+
                         }
                     }
                 })
