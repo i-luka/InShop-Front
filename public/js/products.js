@@ -175,7 +175,7 @@ let app = new Vue({
                         </g>
                     </svg>
                 </a>
-                <div class="circle-point">
+                <div class="circle-point" v-show="goodsCount>0">
                     {{ goodsCount }}
                 </div>
                 <div class="drop-box-cart drop-box-account  drop-box-romb-cart"

@@ -22,13 +22,6 @@
             "product_name": "Mango  People  T-shirt 2",
             "price": 52,
             "img": "../img/product/img2.jpg"
-        },
-        {
-            "quantity": 1,
-            "id_product": 1005,
-            "product_name": "Mango  People  T-shirt 5",
-            "price": 52,
-            "img": "../img/product/img5.jpg"
         }
     ]
 }
