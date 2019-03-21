@@ -34,33 +34,84 @@ let app = new Vue({
                     console.log(error);
                 })
         },
+        postJson(url, data){
+            return fetch(url, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(result => result.json())
+                .catch(error => {
+                    // console.log(error);
+                    this.$refs.error.setError(error);
+                })
+        },
+        putJson(url, data){
+            return fetch(url, {
+                method: 'PUT',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(result => result.json())
+                .catch(error => {
+                    // console.log(error);
+                    this.$refs.error.setError(error);
+                })
+        },
+        delJson(url, data){
+            return fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(result => result.json())
+                .catch(error => {
+                    // console.log(error);
+                    this.$refs.error.setError(error);
+                })
+        },
         addProduct(product){
-            // this.$parent.getJson(`${API}/addToBasket.json`)
-            //     .then(data => {
-            //         if(data.result === 1){
-                        let find = this.cartItems.find(el => el.id_product === product.id_product);
-                        if(find){
+
+            let find = this.cartItems.find(el => el.id_product === product.id_product);
+            if(find){
+                this.putJson(`/api/cart/${find.id_product}`, {quantity: 1})
+                    .then(data => {
+                        if(data.result === 1){
                             find.quantity++;
-                        } else {
-                            let prod = Object.assign({quantity: 1}, product);
-                            this.cartItems.push(prod)
                         }
-                //     } else {
-                //         alert('Error');
-                //     }
-                // })
+                    })
+            } else {
+                let prod = Object.assign({quantity: 1}, product);
+                this.postJson(`/api/cart`, prod)
+                    .then(data => {
+                        if(data.result === 1){
+                            this.cartItems.push(prod);
+                        }
+                    })
+            }
         },
         remove(item){
-            // this.$parent.getJson(`${API}/deleteFromBasket.json`)
-            //     .then(data => {
-            //         if(data.result === 1) {
-                        if(item.quantity>1){
+
+            this.delJson(`/api/cart/${item.id_product}`)
+                .then(data => {
+                    if(data.result === 1){
+
+                        if(item.quantity === 1) {
+
+                            let index = this.cartItems.findIndex(el => el.id_product === item.id_product);
+                            this.cartItems.splice(index, 1);
+                        }else{
+
                             item.quantity--;
-                        } else {
-                            this.cartItems.splice(this.cartItems.indexOf(item), 1)
                         }
-                //     }
-                // })
+                    }
+                })
         },
         filter(searchLine){
 
