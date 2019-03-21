@@ -731,6 +731,7 @@ margin-top:  60px;
     letter-spacing: 0.35px;
     z-index: 1;
     box-sizing: border-box;
+    display: flex;
 }
 .form input[type="search"]{
     color: #a4a4a4;
@@ -1336,10 +1337,10 @@ margin-top:  60px;
     border-radius: 5px;
     background-color: #fff;
     /*padding: 20px;*/
-    /*border: 1px solid #e6e6e6;*/
+    border: 1px solid #e6e6e6;
     display: none;
     top:35px;
-    left: 0px;
+    left: -11px;
     opacity: 0;
     width: 0;
     height: 0;

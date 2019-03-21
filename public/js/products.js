@@ -99,22 +99,33 @@ let app = new Vue({
         },
         remove(item){
 
-            this.delJson(`/api/cart/${item.id_product}`)
-                .then(data => {
-                    if(data.result === 1){
+            if(item.quantity === 1){
 
-                        if(item.quantity === 1) {
+                this.delJson(`/api/cart/${item.id_product}`)
+                    .then(data => {
+                        if(data.result === 1){
 
-                            let index = this.cartItems.findIndex(el => el.id_product === item.id_product);
-                            this.cartItems.splice(index, 1);
-                            this.goodsCount--
-                        }else{
+                            if(item.quantity === 1) {
 
-                            item.quantity--;
+                                let index = this.cartItems.findIndex(el => el.id_product === item.id_product);
+                                this.cartItems.splice(index, 1);
+                                this.goodsCount--
+                            }else{
 
+                                item.quantity--;
+
+                            }
                         }
-                    }
-                })
+                    })
+            }else{
+
+                this.putJson(`/api/cart/${item.id_product}`, {quantity: -1})
+                    .then(data => {
+                        if(data.result === 1){
+                            item.quantity--;
+                        }
+                    })
+            }
         },
         filter(searchLine){
 
