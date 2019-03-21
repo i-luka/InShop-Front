@@ -730,6 +730,7 @@ margin-top:  60px;
     line-height: 32px;
     letter-spacing: 0.35px;
     z-index: 1;
+    box-sizing: border-box;
 }
 .form input[type="search"]{
     color: #a4a4a4;
@@ -1416,10 +1417,11 @@ margin-top:  60px;
     border: 1px solid #eaeaea;
     top:75px;
     left: -15px;
-    display: none;
-    opacity: 0;
-    width: 0;
-    height: 0;
+    padding: 15px;
+    /*display: none;*/
+    /*opacity: 0;*/
+    /*width: 0;*/
+    /*height: 0;*/
 }
 
 .header-right {
@@ -1435,12 +1437,14 @@ margin-top:  60px;
 }
 .drop-flex-cart img{
     margin-right: 14px;
+    width: 80px;
+
 }
 
 .drop-block {
     color: #222222;
     font-size: 12px;
-    width: 84px;
+    width: 104px;
 /*    display: flex;*/
 /*    margin-left: 14px;*/
 /*    padding-top: 5px;*/

@@ -29,16 +29,6 @@ body {
 .cart-chb-c-lbl:hover .cart-chb-svg {
   fill: #f16d7f;
 }
-.cart-chb-c-lbl:hover .drop-box-cart {
-  display: block;
-  opacity: 1;
-  width: auto;
-  height: auto;
-  padding: 20px;
-}
-.cart-chb-c-lbl:hover .drop-box-account:before {
-  display: block;
-}
 
 .features-button-link i {
   margin-left: 15px;
@@ -69,9 +59,9 @@ body {
 
 .browse-lbl {
   text-transform: none;
+  padding: 10px 5px;
   height: 38px;
   line-height: 38px;
-  padding: 0 16px;
   box-sizing: border-box;
   color: #222222;
   border-radius: 3px 0 0 3px;

@@ -9,7 +9,7 @@ Vue.component("cart",{
     template: `
     <div >
                             <a href="#">
-                                <img :src="imgCart" alt="">
+                                <img :src="cart_item.img" alt="">
                             </a>
                             <div class="drop-block">
                                 <h3 class="drop-heading-cart">

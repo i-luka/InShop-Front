@@ -20,15 +20,16 @@ body
   transition: opacity 100ms ease-in,fill 100ms ease-in
   &:hover .cart-chb-svg
     fill: #f16d7f
-  &:hover .drop-box-cart
-    display: block
-    //transition: opacity 1s ease-in
-    opacity: 1
-    width: auto
-    height: auto
-    padding: 20px
-  &:hover .drop-box-account:before
-    display: block
+  // Эта часть которую я меняю, чтобы вместо ховера был клик
+  //&:hover .drop-box-cart
+  //  display: block
+  //  //transition: opacity 1s ease-in
+  //  opacity: 1
+  //  width: auto
+  //  height: auto
+  //  padding: 20px
+  //&:hover .drop-box-account:before
+  //  display: block
 //#cart-chb-svg
 //  padding: 20px
 //  &:hover .drop-box-cart
@@ -59,9 +60,9 @@ body
   z-index: 100
 .browse-lbl
     text-transform: none
+    padding: 10px 5px
     height: 38px
     line-height: 38px
-    padding: 0 16px
     box-sizing: border-box
     color: #222222
     border-radius: 3px 0 0 3px
@@ -180,7 +181,7 @@ body
 .add-prod-c
  padding: 8px 17px
 //.cart-chb-c-lbl
-//  margin-right: 26px
+  //margin-right: 26px
 .product-flex:hover .add-position
   display: flex
 .product-flex:hover .add-position-prod

@@ -9,18 +9,21 @@ let app = new Vue({
         cartUrl: '/api/cart',
         products: [],
         filtered: [],
-        cartItems: {},
+        cartItems: [],
+        amount: 0,
+        goodsCount: 0,
         showCart: false,
     },
     computed:{
 
         total(){
             let res;
-            // if(this.cartItems){
-            //     this.cartItems.contents.reduce((total, el) => total + el.quantity * el.price, 0);
-            // }
-            console.log(this.cartItems.contents);
-            return 50;
+            if(this.cartItems){
+                res = this.cartItems.reduce((total, el) => total + el.quantity * el.price, 0);
+                this.amount = res;
+            }
+            //console.log(this.cartItems);
+            return res;
         }
     },
     methods: {
@@ -48,16 +51,21 @@ let app = new Vue({
                 // })
         },
         remove(item){
-            this.$parent.getJson(`${API}/deleteFromBasket.json`)
-                .then(data => {
-                    if(data.result === 1) {
+            // this.$parent.getJson(`${API}/deleteFromBasket.json`)
+            //     .then(data => {
+            //         if(data.result === 1) {
                         if(item.quantity>1){
                             item.quantity--;
                         } else {
                             this.cartItems.splice(this.cartItems.indexOf(item), 1)
                         }
-                    }
-                })
+                //     }
+                // })
+        },
+        filter(searchLine){
+
+            let regexp = new RegExp(searchLine, 'i');
+            this.filtered = this.products.filter(el => regexp.test(el.product_name));
         }
     },
 
@@ -71,7 +79,10 @@ let app = new Vue({
             });
         this.getJson(this.cartUrl)
             .then(data => {
-                    Object.assign(this.cartItems, data);
+                // this.cartItems = Object.assign({}, data);
+                this.cartItems = data.contents;
+                this.amount = data.amount;
+                this.goodsCount = data.goodsCount;
             });
 
     },
@@ -82,55 +93,15 @@ let app = new Vue({
         <div class="header-left header-flex">
             <a href="../index.html" class="logo header-flex"><img class="logo-img" src="../img/logo.png" alt="" >
                 <p class="header-text">bran<span class="pink">D</span></p></a>
-            <form action="#" class="form header-flex">
-                <div>
-                </div>
-                <label for="browse-chb" class="browse-lbl">
-                    <!--<p class="selection-br">-->
-                    Browse <i class="br-tr fas fa-caret-down"></i>
-                    <!--</p>-->
-                </label>
-                <input type="checkbox" id="browse-chb">
-                <div class="drop-box-browse drop-box-romb-browse">
-                    <div class="drop-flex-browse ">
-                        <h3 class="drop-heading">
-                            Women
-                        </h3>
-                        <ul class="drop-ul">
-                            <li><a class="drop-link" href="#">Dresses</a></li>
-                            <li><a class="drop-link" href="#">Tops</a></li>
-                            <li><a class="drop-link" href="#">Sweaters/Knits</a></li>
-                            <li><a class="drop-link" href="#">Jackets/Coats</a></li>
-                            <li><a class="drop-link" href="#">Blazers</a></li>
-                            <li><a class="drop-link" href="#">Denim</a></li>
-                            <li><a class="drop-link" href="#">Leggings/Pants</a></li>
-                            <li><a class="drop-link" href="#">Skirts/Shorts</a></li>
-                            <li><a class="drop-link" href="#">Accessories </a></li>
-                        </ul>
-                    </div>
-                    <div class="drop-flex-browse">
-                        <h3 class="drop-heading">
-                            men
-                        </h3>
-                        <ul class="drop-ul">
-                            <li><a class="drop-link" href="#">Tees/Tank tops</a></li>
-                            <li><a class="drop-link" href="#">Shirts/Polos</a></li>
-                            <li><a class="drop-link" href="#">Sweaters</a></li>
-                            <li><a class="drop-link" href="#">Sweatshirts/Hoodies</a></li>
-                            <li><a class="drop-link" href="#">Blazers</a></li>
-                            <li><a class="drop-link" href="#">Jackets/vests</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <input type="search" required placeholder="Search for item...">
-                <button type="submit"><i class="br-sm fas fa-search"></i></button>
-            </form>
+            <searchform>
+            
+            </searchform>
         </div>
 
         <div class="header-right header-flex">
             <input type="checkbox" id="cart-chb-c">
             <div  class="cart-chb-c-lbl">
-                <a href="../pages/cart.html">
+                <a href="#" @click.prevent="showCart = !showCart">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                          width="32" height="29" viewBox="0 0 32 29">
                         <defs>
@@ -151,16 +122,18 @@ let app = new Vue({
                     </svg>
                 </a>
                 
-                <div class="drop-box-cart drop-box-account  drop-box-romb-cart">
+                <div class="drop-box-cart drop-box-account  drop-box-romb-cart"
+                        v-show="showCart">
                     <!--<div class="drop-flex-cart" -->
                         <!--v-for="item of cartItems.contents" -->
                         <!--:key="item.id_product"-->
                         <!--:cart_item="item"-->
                        <!--&gt;-->
                         <cart class="drop-flex-cart"
-                        v-for="item of cartItems.contents" 
+                        v-for="item of cartItems" 
                         :key="item.id_product"
-                        :cart_item="item">
+                        :cart_item="item"
+                        @remove="remove">
                         
                         </cart>
                     <!--</div>-->
@@ -771,7 +744,7 @@ let app = new Vue({
             
             <div class="box-product">
                 <div class="product-flex"
-                        v-for="product of filtered" :key="product.id_product">
+                        v-for="product of filtered.slice(0, 9)" :key="product.id_product">
                     <a href="../pages/single.html" class="poduct">
                        <img class="product-img" :src="product.img" alt="product img">
                         <div class="product-text">
@@ -789,7 +762,7 @@ let app = new Vue({
 
                     </a>
                     <div class="add-position-prod">
-                        <a href="#" class="add-prod-c">
+                        <a href="#" class="add-prod-c" @click.prevent="addProduct(product)">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                  width="23" height="22" viewBox="0 0 32 29">
                                 <defs>
@@ -819,10 +792,6 @@ let app = new Vue({
                         </div>
                     </div>
                 </div>
-               
-            
-            
-            
             </div>
         </div>
             <div class="features-control">
