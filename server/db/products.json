@@ -57,56 +57,56 @@
     "id_product": 1111,
     "product_name": "Mango  People  T-shirt 10",
     "price": 52.00,
-    "img": "../img/features/img_1.jpg",
+    "img": "img/features/img_1.jpg",
     "featured": "true"
   },
   {
     "id_product": 1112,
     "product_name": "Mango  People  T-shirt 11",
     "price": 52.00,
-    "img": "../img/features/img_2.jpg",
+    "img": "img/features/img_2.jpg",
     "featured": "true"
   },
   {
     "id_product": 1113,
     "product_name": "Mango  People  T-shirt 12",
     "price": 52.00,
-    "img": "../img/features/img_3.jpg",
+    "img": "img/features/img_3.jpg",
     "featured": "true"
   },
   {
     "id_product": 1114,
     "product_name": "Mango  People  T-shirt 13",
     "price": 52.00,
-    "img": "../img/features/img_4.jpg",
+    "img": "img/features/img_4.jpg",
     "featured": "true"
   },
   {
     "id_product": 1115,
     "product_name": "Mango  People  T-shirt 14",
     "price": 52.00,
-    "img": "../img/features/img_5.jpg",
+    "img": "img/features/img_5.jpg",
     "featured": "true"
   },
   {
     "id_product": 1116,
     "product_name": "Mango  People  T-shirt 15",
     "price": 52.00,
-    "img": "../img/features/img_6.jpg",
+    "img": "img/features/img_6.jpg",
     "featured": "true"
   },
   {
     "id_product": 1117,
     "product_name": "Mango  People  T-shirt 16",
     "price": 52.00,
-    "img": "../img/features/img_7.jpg",
+    "img": "img/features/img_7.jpg",
     "featured": "true"
   },
   {
     "id_product": 1118,
     "product_name": "Mango  People  T-shirt 17",
     "price": 52.00,
-    "img": "../img/features/img_8.jpg",
+    "img": "img/features/img_8.jpg",
     "featured": "true"
   }
 ]

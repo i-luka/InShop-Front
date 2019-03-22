@@ -21,7 +21,6 @@ let app = new Vue({
                 res = this.cartItems.reduce((total, el) => total + el.quantity * el.price, 0);
                 this.amount = res;
             }
-            //console.log(this.cartItems);
             return res;
         }
     },
