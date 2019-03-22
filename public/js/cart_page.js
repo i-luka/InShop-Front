@@ -22,7 +22,8 @@ let app = new Vue({
                 this.amount = res;
             }
             return res;
-        }
+        },
+
     },
     methods: {
         getJson(url){
@@ -129,6 +130,20 @@ let app = new Vue({
 
             let regexp = new RegExp(searchLine, 'i');
             this.filtered = this.products.filter(el => regexp.test(el.product_name));
+        },
+        clearCart() {
+
+            this.cartItems.forEach((el) => {
+
+                this.delJson(`/api/cart/${el.id_product}`)
+                    .then(data => {
+                        if (data.result === 1) {
+
+                            let index = this.cartItems.findIndex(el => el.id_product === item.id_product);
+                            this.cartItems.splice(index, 1);
+                        }
+                    });
+            })
         }
     },
 
@@ -656,16 +671,17 @@ let app = new Vue({
                     <p>ACTION</p>
                 </div>
             </div>
-            <div class="cart-block cart-font">
+            <div class="cart-block cart-font"
+                    v-for="item of cartItems" :key="item.id_product">
                 <div class="cart-item">
-                    <a href="tml">
-                        <img src="../img/cart-page/img1.jpg" alt="">
+                    <a href="single.html">
+                        <img :src="item.img" alt="" class="cart_page_product_img">
                     </a>
                     <div class="product-box">
 
                         <h3 class="cart-p">
                             <a href="tml">
-                                Mango  People  T-shirt
+                                {{ item.product_name }}
                             </a>
                         </h3>
                         <p class="cart-t-c">
@@ -680,11 +696,11 @@ let app = new Vue({
                 </div>
                 <div class="cart-item">
                      <p>
-                         $150
+                         \${{ item.price }}
                      </p>
                 </div>
                 <div class="cart-item">
-                    <input type="number" name="product-quantity" id="cart-product-quantity1" value="2" class="cart-font">
+                    <input type="number" name="product-quantity" id="cart-product-quantity1" v-model.number="item.quantity" class="cart-font">
                 </div>
                 <div class="cart-item">
                      <p>
@@ -693,106 +709,14 @@ let app = new Vue({
                 </div>
                 <div class="cart-item">
                      <p>
-                         $300
+                         \${{ item.price }}
                      </p>
                 </div>
                 <div class="cart-item cart-undo-cont cart-undo-cont_action">
-                     <button>
+                     <button @click="remove(item)">
                          <!--<p>-->
                             <i class="cart-undo fas fa-times-circle"></i>
                         <!--</p>-->
-                    </button>
-                </div>
-            </div>
-            <div class="cart-block cart-font">
-                <div class="cart-item">
-                    <a href="tml">
-                        <img src="../img/cart-page/img2.jpg" alt="">
-                    </a>
-                    <div class="product-box">
-
-                        <h3 class="cart-p">
-                            <a href="tml">
-                                Mango  People  T-shirt
-                            </a>
-                        </h3>
-                        <p class="cart-t-c">
-                            Color:      <span>Red</span>
-                        </p>
-                        <p class="cart-t-s">
-
-                            Size:    <span>XLL</span>
-                        </p>
-
-                    </div>
-                </div>
-                <div class="cart-item">
-                    <p>
-                        $150
-                    </p>
-                </div>
-                <div class="cart-item">
-                    <input type="text" name="product-quantity" id="cart-product-quantity2" value="2" class="cart-font">
-                </div>
-                <div class="cart-item">
-                    <p>
-                        FREE
-                    </p>
-                </div>
-                <div class="cart-item">
-                    <p>
-                        $300
-                    </p>
-                </div>
-                <div class="cart-item cart-undo-cont cart-undo-cont_action">
-                    <button>
-                        <i class="cart-undo fas fa-times-circle"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="cart-block cart-font">
-                <div class="cart-item">
-                    <a href="tml">
-                        <img src="../img/cart-page/img3.jpg" alt="">
-                    </a>
-                    <div class="product-box">
-
-                        <h3 class="cart-p">
-                            <a href="tml">
-                                Mango  People  T-shirt
-                            </a>
-                        </h3>
-                        <p class="cart-t-c">
-                            Color:      <span>Red</span>
-                        </p>
-                        <p class="cart-t-s">
-
-                            Size:    <span>XLL</span>
-                        </p>
-
-                    </div>
-                </div>
-                <div class="cart-item">
-                    <p>
-                        $150
-                    </p>
-                </div>
-                <div class="cart-item">
-                    <input type="text" name="product-quantity" id="cart-product-quantity3" value="2" class="cart-font">
-                </div>
-                <div class="cart-item">
-                    <p>
-                        FREE
-                    </p>
-                </div>
-                <div class="cart-item">
-                    <p>
-                        $300
-                    </p>
-                </div>
-                <div class="cart-item cart-undo-cont cart-undo-cont_action">
-                    <button>
-                        <i class="cart-undo fas fa-times-circle"></i>
                     </button>
                 </div>
             </div>
@@ -801,7 +725,7 @@ let app = new Vue({
             <div class="cart-operation">
                 <!--<a href="#" class="clear-cart">-->
 
-                <button class="clear-cart bover-w">
+                <button class="clear-cart bover-w" @click.prevent="clearCart">
                     cLEAR SHOPPING CART
                 </button>
                 <!--</a>-->
