@@ -164,7 +164,7 @@ let app = new Vue({
         <div class="header-right header-flex">
             <input type="checkbox" id="cart-chb-c">
             <div  class="cart-chb-c-lbl">
-                <a href="/cart.html">
+                <a href="#" @click.prevent="showCart = !showCart">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                          width="32" height="29" viewBox="0 0 32 29">
                         <defs>
@@ -184,77 +184,33 @@ let app = new Vue({
                         </g>
                     </svg>
                 </a>
-                <div class="drop-box-cart drop-box-account  drop-box-romb-cart">
-                    <div class="drop-flex-cart">
-                        <a href="tml">
-                            <img class="cart-img-acc" src="../img/cart/img1.jpg" alt="">
-                        </a>
-                        <div class="drop-block">
-
-                            <h3 class="drop-heading-cart">
-                                <a href="tml">
-                                    Rebox Zane
-                                </a>
-                            </h3>
-                            <p class="cart-p">
-                                <i class="cart-star fas fa-star"></i>
-                                <i class="cart-star fas fa-star"></i>
-                                <i class="cart-star fas fa-star"></i>
-                                <i class="cart-star fas fa-star"></i>
-                                <i class="cart-star fas fa-star-half-alt"></i>
-                            </p>
-                            <p class="cart-price pink">
-                                1 x $250
-                            </p>
-
-                        </div>
-                        <div class="cart-undo-cont">
-                            <button id="undo-btn1">
-                                <i class="cart-undo fas fa-times-circle"></i>
-                            </button>
-                            <label for="undo-btn1"></label>
-                        </div>
-                    </div>
-                    <div class="drop-flex-cart">
-                        <a href="tml">
-                            <img src="../img/cart/img2.jpg" alt="">
-                        </a>
-                        <div class="drop-block">
-
-                            <h3 class="drop-heading-cart">
-                                <a href="tml">
-                                    Rebox Zane
-                                </a>
-                            </h3>
-                            <p class="cart-p">
-                                <i class="cart-star fas fa-star"></i>
-                                <i class="cart-star fas fa-star"></i>
-                                <i class="cart-star fas fa-star"></i>
-                                <i class="cart-star fas fa-star"></i>
-                                <i class="cart-star fas fa-star-half-alt"></i>
-                            </p>
-                            <p class="cart-price pink">
-                                1 x $250
-                            </p>
-
-                        </div>
-                        <div class="cart-undo-cont">
-                            <button id="undo-btn2">
-                                <i class="cart-undo fas fa-times-circle"></i>
-                            </button>
-                            <label for="undo-btn2"></label>
-                        </div>
-
-                    </div>
+                <div class="circle-point" v-show="goodsCount>0">
+                    {{ goodsCount }}
+                </div>
+                <div class="drop-box-cart drop-box-account  drop-box-romb-cart"
+                        v-show="showCart">
+                    <!--<div class="drop-flex-cart" -->
+                        <!--v-for="item of cartItems.contents" -->
+                        <!--:key="item.id_product"-->
+                        <!--:cart_item="item"-->
+                       <!--&gt;-->
+                        <cart class="drop-flex-cart"
+                        v-for="item of cartItems" 
+                        :key="item.id_product"
+                        :cart_item="item"
+                        @remove="remove">
+                        
+                        </cart>
+                    <!--</div>-->
                     <div class="cart-price-total-cont">
                         <p class="cart-price-total">
-                            TOTAL            <span>$500.00</span>
+                            TOTAL            <span>\${{ total }}</span>
                         </p>
                     </div>
-                    <a href=".html" class="cart-checkout pink">
+                    <a href="../pages/checkout.html" class="cart-checkout pink">
                         Checkout
                     </a>
-                    <a href="/cart.html" class="cart-gotocart pink">
+                    <a href="../pages/cart.html" class="cart-gotocart pink">
                         Go to cart
                     </a>
                 </div>
