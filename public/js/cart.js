@@ -25,7 +25,7 @@ Vue.component("cart",{
                                     <i class="cart-star fas fa-star-half-alt"></i>
                                 </p>
                                 <p class="cart-price pink">
-                                    {{cart_item.quantity}} x {{cart_item.price}}
+                                    {{cart_item.quantity}} x \${{cart_item.price}}
                                 </p>
 
                             </div>

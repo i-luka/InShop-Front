@@ -207,7 +207,7 @@ let app = new Vue({
                                 <!--</div>-->
                                 <div class="cart-price-total-cont">
                                     <p class="cart-price-total">
-                                        TOTAL            <span>{{ total }}</span>
+                                        TOTAL            <span>\${{ total }}</span>
                                     </p>
                                 </div>
                                 <a href="../pages/checkout.html" class="cart-checkout pink">
@@ -699,7 +699,7 @@ let app = new Vue({
                                         {{ product.product_name }}
                                     </p>
                                     <p class="product-price pink">
-                                        {{ product.price }}
+                                       \${{ product.price }}
                                     </p>
                                 </div>
                             </a>
