@@ -783,10 +783,10 @@ let app = new Vue({
                 <div class="checkout">
                     <div>
                         <p>
-                            Sub total         <span>$900</span>
+                            Sub total         <span>\${{total}}</span>
                         </p>
                         <h3>
-                            GRAND TOTAL <span> $900 </span>
+                            GRAND TOTAL <span> \${{total}} </span>
                         </h3>
                     </div>
                     <a href="checkout.html" class="checkout">
