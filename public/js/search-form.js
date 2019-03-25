@@ -2,15 +2,39 @@ Vue.component('searchform',{
 
     data(){
         return {
-            searchLine: ""
+            searchLine: "",
+            hover: false
         }
     },
+    methods:{
+        search_btn_mouseover(){
+
+            document.forms["searchform"].searchform_input.style.border = "1px solid  #f16d7f";
+            document.forms["searchform"].searchform_btn.style.border = "1px solid  #f16d7f";
+            document.forms["searchform"].searchform_btn.style.borderLeft = "1px none  #f16d7f";
+            // document.forms["searchform"].searchform_icon.style.color = "#f16d7f";
+            document.forms["searchform"].searchform_input.style.borderLeft = "1px none  #f16d7f";
+
+        },
+
+        search_btn_mouseleave(){
+
+            document.forms["searchform"].searchform_input.style.border = "1px solid  #e6e6e6";
+            document.forms["searchform"].searchform_btn.style.border = "1px solid  #e6e6e6";
+            document.forms["searchform"].searchform_btn.style.borderLeft = "1px none  #f16d7f";
+            document.forms["searchform"].searchform_input.style.borderLeft = "1px none  #f16d7f";
+            // document.forms["searchform"].searchform_icon.style.color = "#e6e6e6";
+        }
+
+    },
     template: `
-        <form action="#" class="form" @submit.prevent="$parent.filter(searchLine)">
+        <form action="#" class="form" @submit.prevent="$parent.filter(searchLine)"
+                name="searchform">
 
                <div>
                 </div>
-                <label for="browse-chb" class="browse-lbl">
+                <label for="browse-chb" class="browse-lbl"
+                        name="searchform_label">
                     <!--<p class="selection-br">-->
                     Browse <i class="br-tr fas fa-caret-down"></i>
                     <!--</p>-->
@@ -47,8 +71,14 @@ Vue.component('searchform',{
                         </ul>
                     </div>
                 </div>
-                <input type="search" required placeholder="Search for item..."  v-model="searchLine">
-                <button type="submit"><i class="br-sm fas fa-search"></i></button>
+                <input type="search" required placeholder="Search for item..."  v-model="searchLine"
+                        name="searchform_input">
+                <button type="submit"
+                        @mouseover="search_btn_mouseover"
+                        @mouseleave="search_btn_mouseleave"
+                        name="searchform_btn">
+                <i class="br-sm fas fa-search" name="searchform_icon"></i>
+                </button>
                
                 <!--<input type="text" class="search-field" v-model="searchLine">-->
 
