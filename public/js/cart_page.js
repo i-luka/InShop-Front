@@ -5,25 +5,8 @@ let app = new Vue({
     data: {
 
         catalogUrl: "/api/products",
-        cartUrl: '/api/cart',
         products: [],
         filtered: [],
-        cartItems: [],
-        amount: 0,
-        goodsCount: 0,
-        showCart: false,
-    },
-    computed:{
-
-        total(){
-            let res;
-            if(this.cartItems){
-                res = this.cartItems.reduce((total, el) => total + el.quantity * el.price, 0);
-                this.amount = res;
-            }
-            return res;
-        },
-
     },
     methods: {
         getJson(url){
@@ -75,76 +58,25 @@ let app = new Vue({
                     this.$refs.error.setError(error);
                 })
         },
-        addProduct(product){
-
-            let find = this.cartItems.find(el => el.id_product === product.id_product);
-            if(find){
-                this.putJson(`/api/cart/${find.id_product}`, {quantity: 1})
-                    .then(data => {
-                        if(data.result === 1){
-                            find.quantity++;
-                        }
-                    })
-            } else {
-                let prod = Object.assign({quantity: 1}, product);
-                this.postJson(`/api/cart`, prod)
-                    .then(data => {
-                        if(data.result === 1){
-                            this.cartItems.push(prod);
-                            this.goodsCount++
-                        }
-                    })
-            }
-        },
-        remove(item){
-
-            if(item.quantity === 1){
-
-                this.delJson(`/api/cart/${item.id_product}`)
-                    .then(data => {
-                        if(data.result === 1){
-
-                            if(item.quantity === 1) {
-
-                                let index = this.cartItems.findIndex(el => el.id_product === item.id_product);
-                                this.cartItems.splice(index, 1);
-                                this.goodsCount--
-                            }else{
-
-                                item.quantity--;
-
-                            }
-                        }
-                    })
-            }else{
-
-                this.putJson(`/api/cart/${item.id_product}`, {quantity: -1})
-                    .then(data => {
-                        if(data.result === 1){
-                            item.quantity--;
-                        }
-                    })
-            }
-        },
         filter(searchLine){
 
             let regexp = new RegExp(searchLine, 'i');
             this.filtered = this.products.filter(el => regexp.test(el.product_name));
         },
-        clearCart() {
-
-            this.cartItems.forEach((el) => {
-
-                this.delJson(`/api/cart/${el.id_product}`)
-                    .then(data => {
-                        if (data.result === 1) {
-
-                            let index = this.cartItems.findIndex(el => el.id_product === item.id_product);
-                            this.cartItems.splice(index, 1);
-                        }
-                    });
-            })
-        }
+        // clearCart() {
+        //
+        //     this.refs.cartcont.cartItems.forEach((el) => {
+        //
+        //         this.delJson(`/api/cart/${el.id_product}`)
+        //             .then(data => {
+        //                 if (data.result === 1) {
+        //
+        //                     let index = this.refs.cartcont.cartItems.indexOf(el);
+        //                     this.refs.cartcont.cartItems.splice(index, 1);
+        //                 }
+        //             });
+        //     })
+        // }
     },
 
     mounted(){
@@ -155,14 +87,6 @@ let app = new Vue({
                     this.filtered.push(el);
                 }
             });
-        this.getJson(this.cartUrl)
-            .then(data => {
-                // this.cartItems = Object.assign({}, data);
-                this.cartItems = data.contents;
-                this.amount = data.amount;
-                this.goodsCount = data.countGoods;
-            });
-
     },
     template: `
     <div>
@@ -623,55 +547,55 @@ let app = new Vue({
                     <p>ACTION</p>
                 </div>
             </div>
-            <div class="cart-block cart-font"
-                    v-for="item of cartItems" :key="item.id_product">
-                <div class="cart-item">
-                    <a href="single.html">
-                        <img :src="item.img" alt="" class="cart_page_product_img">
-                    </a>
-                    <div class="product-box">
+            <!--<div class="cart-block cart-font"-->
+                    <!--v-for="item of $root.$refs.cartcont._data.cartItems" :key="item.id_product">-->
+                <!--<div class="cart-item">-->
+                    <!--<a href="single.html">-->
+                        <!--<img :src="item.img" alt="" class="cart_page_product_img">-->
+                    <!--</a>-->
+                    <!--<div class="product-box">-->
 
-                        <h3 class="cart-p">
-                            <a href="tml">
-                                {{ item.product_name }}
-                            </a>
-                        </h3>
-                        <p class="cart-t-c">
-                            Color:      <span>Red</span>
-                        </p>
-                        <p class="cart-t-s">
-
-                            Size:    <span>XLL</span>
-                        </p>
-
-                    </div>
-                </div>
-                <div class="cart-item">
-                     <p>
-                         \${{ item.price }}
-                     </p>
-                </div>
-                <div class="cart-item">
-                    <input type="number" name="product-quantity" id="cart-product-quantity1" v-model.number="item.quantity" class="cart-font">
-                </div>
-                <div class="cart-item">
-                     <p>
-                         FREE
-                     </p>
-                </div>
-                <div class="cart-item">
-                     <p>
-                         \${{ item.price }}
-                     </p>
-                </div>
-                <div class="cart-item cart-undo-cont cart-undo-cont_action">
-                     <button @click="remove(item)">
-                         <!--<p>-->
-                            <i class="cart-undo fas fa-times-circle"></i>
+                        <!--<h3 class="cart-p">-->
+                            <!--<a href="tml">-->
+                                <!--{{ item.product_name }}-->
+                            <!--</a>-->
+                        <!--</h3>-->
+                        <!--<p class="cart-t-c">-->
+                            <!--Color:      <span>Red</span>-->
                         <!--</p>-->
-                    </button>
-                </div>
-            </div>
+                        <!--<p class="cart-t-s">-->
+
+                            <!--Size:    <span>XLL</span>-->
+                        <!--</p>-->
+
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="cart-item">-->
+                     <!--<p>-->
+                         <!--\${{ item.price }}-->
+                     <!--</p>-->
+                <!--</div>-->
+                <!--<div class="cart-item">-->
+                    <!--<input type="number" name="product-quantity" id="cart-product-quantity1" v-model.number="item.quantity" class="cart-font">-->
+                <!--</div>-->
+                <!--<div class="cart-item">-->
+                     <!--<p>-->
+                         <!--FREE-->
+                     <!--</p>-->
+                <!--</div>-->
+                <!--<div class="cart-item">-->
+                     <!--<p>-->
+                         <!--\${{ item.price }}-->
+                     <!--</p>-->
+                <!--</div>-->
+                <!--<div class="cart-item cart-undo-cont cart-undo-cont_action">-->
+                     <!--<button @click="remove(item)">-->
+                         <!--&lt;!&ndash;<p>&ndash;&gt;-->
+                            <!--<i class="cart-undo fas fa-times-circle"></i>-->
+                        <!--&lt;!&ndash;</p>&ndash;&gt;-->
+                    <!--</button>-->
+                <!--</div>-->
+            <!--</div>-->
     </div>
         <div class="cart-bottom container">
             <div class="cart-operation">

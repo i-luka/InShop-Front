@@ -5,25 +5,9 @@ let app = new Vue({
     data: {
 
         catalogUrl: "/api/products",
-        cartUrl: '/api/cart',
         products: [],
         filtered: [],
-        cartItems: [],
-        amount: 0,
-        goodsCount: 0,
-        showCart: false,
     },
-    // computed:{
-    //
-    //     total(){
-    //         let res;
-    //         if(this.cartItems){
-    //             res = this.cartItems.reduce((total, el) => total + el.quantity * el.price, 0);
-    //             this.amount = res;
-    //         }
-    //         return res;
-    //     }
-    // },
     methods: {
         getJson(url){
             return fetch(new Request(url, ))
@@ -74,57 +58,6 @@ let app = new Vue({
                     this.$refs.error.setError(error);
                 })
         },
-        addProduct(product){
-
-            let find = this.cartItems.find(el => el.id_product === product.id_product);
-            if(find){
-                this.putJson(`/api/cart/${find.id_product}`, {quantity: 1})
-                    .then(data => {
-                        if(data.result === 1){
-                            find.quantity++;
-                        }
-                    })
-            } else {
-                let prod = Object.assign({quantity: 1}, product);
-                this.postJson(`/api/cart`, prod)
-                    .then(data => {
-                        if(data.result === 1){
-                            this.cartItems.push(prod);
-                            this.goodsCount++
-                        }
-                    })
-            }
-        },
-        // remove(item){
-        //
-        //     if(item.quantity === 1){
-        //
-        //         this.delJson(`/api/cart/${item.id_product}`)
-        //             .then(data => {
-        //                 if(data.result === 1){
-        //
-        //                     if(item.quantity === 1) {
-        //
-        //                         let index = this.cartItems.findIndex(el => el.id_product === item.id_product);
-        //                         this.cartItems.splice(index, 1);
-        //                         this.goodsCount--
-        //                     }else{
-        //
-        //                         item.quantity--;
-        //
-        //                     }
-        //                 }
-        //             })
-        //     }else{
-        //
-        //         this.putJson(`/api/cart/${item.id_product}`, {quantity: -1})
-        //             .then(data => {
-        //                 if(data.result === 1){
-        //                     item.quantity--;
-        //                 }
-        //             })
-        //     }
-        // },
         filter(searchLine){
 
             let regexp = new RegExp(searchLine, 'i');
@@ -140,14 +73,6 @@ let app = new Vue({
                     this.filtered.push(el);
                 }
             });
-        // this.getJson(this.cartUrl)
-        //     .then(data => {
-        //         // this.cartItems = Object.assign({}, data);
-        //         this.cartItems = data.contents;
-        //         this.amount = data.amount;
-        //         this.goodsCount = data.countGoods;
-        //     });
-
     },
     template: `
     <div>
@@ -164,7 +89,7 @@ let app = new Vue({
         <div class="header-right header-flex">
             <input type="checkbox" id="cart-chb-c">
             
-            <cartcont>
+            <cartcont ref="cartcont">
             
             </cartcont>
 

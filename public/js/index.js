@@ -5,25 +5,10 @@ let app = new Vue({
     data: {
 
         catalogUrl: "/api/products",
-        cartUrl: '/api/cart',
         products: [],
         filtered: [],
-        cartItems: [],
-        amount: 0,
-        goodsCount: 0,
-        showCart: false,
     },
-    computed:{
 
-        total(){
-            let res;
-            if(this.cartItems){
-                res = this.cartItems.reduce((total, el) => total + el.quantity * el.price, 0);
-                this.amount = res;
-            }
-            return res;
-        }
-    },
     methods: {
         getJson(url){
             return fetch(new Request(url, ))
@@ -42,8 +27,6 @@ let app = new Vue({
             })
                 .then(result => result.json())
                 .catch(error => {
-                    // console.log(error);
-                    //this.$refs.error.setError(error);
                 })
         },
         putJson(url, data){
@@ -56,8 +39,6 @@ let app = new Vue({
             })
                 .then(result => result.json())
                 .catch(error => {
-                    // console.log(error);
-                    //this.$refs.error.setError(error);
                 })
         },
         delJson(url, data){
@@ -70,61 +51,10 @@ let app = new Vue({
             })
                 .then(result => result.json())
                 .catch(error => {
-                    // console.log(error);
                     this.$refs.error.setError(error);
                 })
         },
-        addProduct(product){
 
-            let find = this.cartItems.find(el => el.id_product === product.id_product);
-            if(find){
-                this.putJson(`/api/cart/${find.id_product}`, {quantity: 1})
-                    .then(data => {
-                        if(data.result === 1){
-                            find.quantity++;
-                        }
-                    })
-            } else {
-                let prod = Object.assign({quantity: 1}, product);
-                this.postJson(`/api/cart`, prod)
-                    .then(data => {
-                        if(data.result === 1){
-                            this.cartItems.push(prod);
-                            this.goodsCount++
-                        }
-                    })
-            }
-        },
-        remove(item){
-
-            if(item.quantity === 1){
-
-                this.delJson(`/api/cart/${item.id_product}`)
-                    .then(data => {
-                        if(data.result === 1){
-
-                            if(item.quantity === 1) {
-
-                                let index = this.cartItems.findIndex(el => el.id_product === item.id_product);
-                                this.cartItems.splice(index, 1);
-                                this.goodsCount--
-                            }else{
-
-                                item.quantity--;
-
-                            }
-                        }
-                    })
-            }else{
-
-                this.putJson(`/api/cart/${item.id_product}`, {quantity: -1})
-                    .then(data => {
-                        if(data.result === 1){
-                            item.quantity--;
-                        }
-                    })
-            }
-        },
         filter(searchLine){
 
             let regexp = new RegExp(searchLine, 'i');
@@ -143,14 +73,6 @@ let app = new Vue({
                     }
                 }
             });
-        this.getJson(this.cartUrl)
-            .then(data => {
-                // this.cartItems = Object.assign({}, data);
-                this.cartItems = data.contents;
-                this.amount = data.amount;
-                this.goodsCount = data.countGoods;
-            });
-
     },
     template: `
     <div>
@@ -169,7 +91,7 @@ let app = new Vue({
                         
                         <cartcont ref="cartcont">
 
-                         </cartcont>
+                        </cartcont>
 
                         <a href="#" class="button bover-w">
                             My Account <i class="acc-tr fas fa-caret-down"></i>
@@ -656,7 +578,7 @@ let app = new Vue({
                                 </div>
                             </a>
                             <div class="add-position">
-                                <a href="#" class="add" @click.prevent="addProduct(product)">
+                                <a href="#" class="add" @click.prevent="$root.$refs.cartcont.addProduct(product)">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                          width="23" height="22" viewBox="0 0 32 29">
                                         <defs>

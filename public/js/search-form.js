@@ -3,7 +3,6 @@ Vue.component('searchform',{
     data(){
         return {
             searchLine: "",
-            hover: false
         }
     },
     methods:{
