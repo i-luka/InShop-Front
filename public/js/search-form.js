@@ -27,7 +27,7 @@ Vue.component('searchform',{
 
     },
     template: `
-        <form action="#" class="form" @submit.prevent="$parent.filter(searchLine)"
+        <form action="#" class="form" @submit.prevent="$root.$refs.catalog.filter(searchLine)"
                 name="searchform">
 
                <div>
