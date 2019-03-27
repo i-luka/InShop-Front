@@ -1,5 +1,5 @@
 Vue.component("cartcont_page",{
-   props: ["item"],
+   props: ["cartItems"],
    template: `
    
        <div class="main-container">
@@ -24,9 +24,9 @@ Vue.component("cartcont_page",{
                     <p>ACTION</p>
                 </div>
             </div>
-            <div class="cart-block cart-font">
-                    <!--<div class="cart-block cart-font"-->
-                    <!--v-for="item of this.$children[1]._data.cartItems" :key="item.id_product">-->
+            <!--<div class="cart-block cart-font">-->
+                <div class="cart-block cart-font"
+                    v-for="item of cartItems" :key="item.id_product">
                 <div class="cart-item">
                     <a href="single.html">
                         <img :src="item.img" alt="" class="cart_page_product_img">
@@ -137,10 +137,10 @@ Vue.component("cartcont_page",{
                 <div class="checkout">
                     <div>
                         <p>
-                            Sub total         <span>\${{total}}</span>
+                            <!--Sub total         <span>\${{total}}</span>-->
                         </p>
                         <h3>
-                            GRAND TOTAL <span> \${{total}} </span>
+                            <!--GRAND TOTAL <span> \${{total}} </span>-->
                         </h3>
                     </div>
                     <a href="checkout.html" class="checkout">

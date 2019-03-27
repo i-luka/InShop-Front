@@ -61,8 +61,8 @@ Vue.component("cartcont",{
                         v-for="item of cartItems" 
                         :key="item.id_product"
                         :cart_item="item"
-                        @remove="$emit('remove', cart_item)"
-                        >
+                        @remove="$emit('remove', item)"
+                        >шеуь
                         </cart>
                     <!--</div>-->
                     <div class="cart-price-total-cont">

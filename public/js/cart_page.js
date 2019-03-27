@@ -103,7 +103,7 @@ let app = new Vue({
         <div class="header-right header-flex">
             <input type="checkbox" id="cart-chb-c">
             
-            <united_cart :showIt="true">
+            <united_cart :type="dropdown">
 
             </united_cart>
 
@@ -525,7 +525,9 @@ let app = new Vue({
         <p class="top-line-bread"><a href="../index.html">Home</a> / <a href="html">Men</a> / <a href="#" id="current-page">New Arrivals</a> </p>
     </div>
 </div>
-    //cart here
+    <united_cart :type="standalone">
+
+    </united_cart>
     </div>
     `
 });
