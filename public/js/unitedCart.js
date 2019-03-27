@@ -1,14 +1,15 @@
+const data = {
+
+    cartUrl: '/api/cart',
+    cartItems: [],
+    amount: 0,
+    goodsCount: 0,
+    showCart: false,
+};
 Vue.component("united_cart",{
     props: ["showit"],
     data(){
-        return {
-
-            cartUrl: '/api/cart',
-            cartItems: [],
-            amount: 0,
-            goodsCount: 0,
-            showCart: false,
-        }
+        return data;
     },
     methods:{
 

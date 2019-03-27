@@ -15,7 +15,7 @@ Vue.component("cartcont",{
         total(){
             let res;
             if(cartItems){
-                res = this.$parent.cartItems.reduce((total, el) => total + el.quantity * el.price, 0);
+                res = cartItems.reduce((total, el) => total + el.quantity * el.price, 0);
                 this.amount = res;
             }
             return res;
@@ -62,12 +62,12 @@ Vue.component("cartcont",{
                         :key="item.id_product"
                         :cart_item="item"
                         @remove="$emit('remove', item)"
-                        >шеуь
+                        >
                         </cart>
                     <!--</div>-->
                     <div class="cart-price-total-cont">
                         <p class="cart-price-total">
-                            TOTAL            <span>\${{ this.$parent.total }}</span>
+                            TOTAL            <span>\${{ total }}</span>
                         </p>
                     </div>
                     <a href="../pages/checkout.html" class="cart-checkout pink">
