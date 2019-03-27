@@ -1,5 +1,5 @@
 Vue.component("united_cart",{
-    props: ["type"],
+    props: ["showit"],
     data(){
         return {
 
@@ -77,15 +77,17 @@ Vue.component("united_cart",{
     template: `
     
         <div>
-            <cartcont ref="cartcont" v-show="type == 'dropdown'"
+            <cartcont_page ref="cartcont_page" v-if="showit"
+                            class="main-container"
+                            :cartItems="cartItems"
+                            @remove="remove">
+            
+            </cartcont_page>
+            <cartcont ref="cartcont" v-else
                       :cartItems="cartItems"
                       @remove="remove">
     
             </cartcont>
-            <cartcont_page ref="cartcont_page" v-show="type == 'standalone'"
-                            class="main-container">
-            
-            </cartcont_page>
         </div> 
     `
 

@@ -67,7 +67,7 @@ Vue.component("cartcont_page",{
                      </p>
                 </div>
                 <div class="cart-item cart-undo-cont cart-undo-cont_action">
-                     <button @click="remove(item)">
+                     <button @click="$emit('remove', item)">
                          <p>
                             <i class="cart-undo fas fa-times-circle"></i>
                         </p>
