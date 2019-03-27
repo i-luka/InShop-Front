@@ -1,25 +1,25 @@
 Vue.component("cartcont",{
 
-    props: ['cartItems'],
+    props: ['cartItems', 'amount', 'goodsCount'],
     data(){
         return {
-
-            cartUrl: '/api/cart',
-            amount: 0,
-            goodsCount: 0,
+            //
+            // cartUrl: '/api/cart',
+            // amount: 0,
+            // goodsCount: 0,
             showCart: false,
         }
     },
     computed:{
 
-        total(){
-            let res;
-            if(cartItems){
-                res = cartItems.reduce((total, el) => total + el.quantity * el.price, 0);
-                this.amount = res;
-            }
-            return res;
-        }
+        // total(){
+        //     let res;
+        //     //if(cartItems){
+        //         res = cartItems.reduce((total, el) => total + el.quantity * el.price, 0);
+        //         this.amount = res;
+        //     //}
+        //     return res;
+        // }
     },
     methods:{
 
@@ -67,7 +67,7 @@ Vue.component("cartcont",{
                     <!--</div>-->
                     <div class="cart-price-total-cont">
                         <p class="cart-price-total">
-                            TOTAL            <span>\${{ total }}</span>
+                            TOTAL            <span>\${{ cartItems.reduce((total, el) => total + el.quantity * el.price, 0) }}</span>
                         </p>
                     </div>
                     <a href="../pages/checkout.html" class="cart-checkout pink">

@@ -50,7 +50,7 @@ Vue.component("cartcont_page",{
                 </div>
                 <div class="cart-item">
                      <p>
-                         \${{item.quantity}}
+                         \${{item.price}}
                      </p>
                 </div>
                 <div class="cart-item">
@@ -63,7 +63,7 @@ Vue.component("cartcont_page",{
                 </div>
                 <div class="cart-item">
                      <p>
-                         \${{item.price}}
+                         \${{item.price*item.quantity}}
                      </p>
                 </div>
                 <div class="cart-item cart-undo-cont cart-undo-cont_action">
@@ -79,7 +79,7 @@ Vue.component("cartcont_page",{
             <div class="cart-operation">
                 <!--<a href="#" class="clear-cart">-->
 
-                <button class="clear-cart bover-w" @click.prevent="clearCart">
+                <button class="clear-cart bover-w" @click.prevent="$emit('clearCartEvnt')">
                     cLEAR SHOPPING CART
                 </button>
                 <!--</a>-->
@@ -137,10 +137,10 @@ Vue.component("cartcont_page",{
                 <div class="checkout">
                     <div>
                         <p>
-                            <!--Sub total         <span>\${{total}}</span>-->
+                            Sub total         <span>\${{cartItems.reduce((total, el) => total + el.quantity * el.price, 0)}}</span>
                         </p>
                         <h3>
-                            <!--GRAND TOTAL <span> \${{total}} </span>-->
+                            GRAND TOTAL <span> \${{cartItems.reduce((total, el) => total + el.quantity * el.price, 0)}} </span>
                         </h3>
                     </div>
                     <a href="checkout.html" class="checkout">

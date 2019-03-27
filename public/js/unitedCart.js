@@ -65,6 +65,20 @@ Vue.component("united_cart",{
             }
         }
     },
+    clearCart() {
+
+        this.cartItems.forEach((el) => {
+
+            this.delJson(`/api/cart/${el.id_product}`)
+                .then(data => {
+                    if (data.result === 1) {
+
+                        let index = this.cartItems.indexOf(el);
+                        this.cartItems.splice(index, 1);
+                    }
+                });
+        })
+    },
     mounted(){
 
         this.$parent.getJson(this.cartUrl)
@@ -81,12 +95,17 @@ Vue.component("united_cart",{
             <cartcont_page ref="cartcont_page" v-if="showit"
                             class="main-container"
                             :cartItems="cartItems"
-                            @remove="remove">
+                            @remove="remove"
+                            @clearCartEvnt="clearCart"
+                            >
             
             </cartcont_page>
             <cartcont ref="cartcont" v-else
                       :cartItems="cartItems"
-                      @remove="remove">
+                      :amount="cartItems.reduce((total, el) => total + el.quantity * el.price, 0)"
+                      :goodsCount="cartItems.length"
+                      @remove="remove"
+                      >
     
             </cartcont>
         </div> 
