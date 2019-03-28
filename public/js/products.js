@@ -86,9 +86,9 @@ let app = new Vue({
         <div class="header-right header-flex">
             <input type="checkbox" id="cart-chb-c">
 
-            <cartcont ref="cartcont">
+            <united_cart :showit="false" ref="cartcont">
 
-            </cartcont>
+            </united_cart>
 
             <a href="#" class="button bover-w">
                 My Account <i class="acc-tr fas fa-caret-down"></i>
