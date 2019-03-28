@@ -25,55 +25,12 @@ Vue.component("cartcont_page",{
                 </div>
             </div>
             <!--<div class="cart-block cart-font">-->
-                <div class="cart-block cart-font"
-                    v-for="item of cartItems" :key="item.id_product">
-                <div class="cart-item">
-                    <a href="single.html">
-                        <img :src="item.img" alt="" class="cart_page_product_img">
-                    </a>
-                    <div class="product-box">
-
-                        <h3 class="cart-p">
-                            <a href="tml">
-                                {{ item.product_name }}
-                            </a>
-                        </h3>
-                        <p class="cart-t-c">
-                            Color:      <span>Red</span>
-                        </p>
-                        <p class="cart-t-s">
-
-                            Size:    <span>XLL</span>
-                        </p>
-
-                    </div>
-                </div>
-                <div class="cart-item">
-                     <p>
-                         \${{item.price}}
-                     </p>
-                </div>
-                <div class="cart-item">
-                    <input type="number" name="product-quantity" id="cart-product-quantity1" v-model.number="item.quantity" class="cart-font">
-                </div>
-                <div class="cart-item">
-                     <p>
-                         FREE
-                     </p>
-                </div>
-                <div class="cart-item">
-                     <p>
-                         \${{item.price*item.quantity}}
-                     </p>
-                </div>
-                <div class="cart-item cart-undo-cont cart-undo-cont_action">
-                     <button @click="$emit('remove', item)">
-                         <p>
-                            <i class="cart-undo fas fa-times-circle"></i>
-                        </p>
-                    </button>
-                </div>
-            </div>
+             <cartitem class="cart-block cart-font"
+                    v-for="item of cartItems" :key="item.id_product"
+                    :item="item"
+                    @remove="$emit('remove', item)">
+             
+            </cartitem>
         </div>
         <div class="cart-bottom container">
             <div class="cart-operation">
@@ -150,5 +107,61 @@ Vue.component("cartcont_page",{
             </div>
         </div>
     </div> 
+   `
+});
+
+Vue.component("cartitem",{
+
+   props: ["item"],
+   template: `
+   
+      <div >
+                <div class="cart-item">
+                    <a href="single.html">
+                        <img :src="item.img" alt="" class="cart_page_product_img">
+                    </a>
+                    <div class="product-box">
+
+                        <h3 class="cart-p">
+                            <a href="tml">
+                                {{ item.product_name }}
+                            </a>
+                        </h3>
+                        <p class="cart-t-c">
+                            Color:      <span>Red</span>
+                        </p>
+                        <p class="cart-t-s">
+
+                            Size:    <span>XLL</span>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="cart-item">
+                     <p>
+                         \${{item.price}}
+                     </p>
+                </div>
+                <div class="cart-item">
+                    <input type="number" name="product-quantity" id="cart-product-quantity1" v-model.number="item.quantity" class="cart-font">
+                </div>
+                <div class="cart-item">
+                     <p>
+                         FREE
+                     </p>
+                </div>
+                <div class="cart-item">
+                     <p>
+                         \${{item.price*item.quantity}}
+                     </p>
+                </div>
+                <div class="cart-item cart-undo-cont cart-undo-cont_action">
+                     <button @click="$emit('remove', item)">
+                         <p>
+                            <i class="cart-undo fas fa-times-circle"></i>
+                        </p>
+                    </button>
+                </div>
+            </div>
    `
 });

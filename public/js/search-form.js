@@ -70,7 +70,7 @@ Vue.component('searchform',{
                         </ul>
                     </div>
                 </div>
-                <input type="search" required placeholder="Search for item..."  v-model="searchLine"
+                <input type="search" placeholder="Search for item..."  v-model="searchLine"
                         name="searchform_input">
                 <button type="submit"
                         @mouseover="search_btn_mouseover"
