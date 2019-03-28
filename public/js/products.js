@@ -5,13 +5,8 @@ let app = new Vue({
     data: {
 
         catalogUrl: "/api/products",
-        cartUrl: '/api/cart',
         products: [],
         filtered: [],
-        cartItems: [],
-        amount: 0,
-        goodsCount: 0,
-        showCart: false,
     },
     methods: {
         getJson(url) {
