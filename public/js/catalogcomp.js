@@ -260,8 +260,7 @@ Vue.component("product_item", {
                                                 <i class="star-prod fas fa-star"></i>
                                                 <i class="star-prod fas fa-star"></i>
                                     </p>
-                                </div>
-        
+                                </div> 
                             </a>
                             <div class="add-position-prod">
                                 <a href="#" class="add-prod-c" @click.prevent="$root.$refs.cartcont.addProduct(product)">

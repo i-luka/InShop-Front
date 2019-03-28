@@ -4,9 +4,9 @@ let app = new Vue({
     el: "#index_app",
     data: {
 
-        catalogUrl: "/api/products",
-        products: [],
-        filtered: [],
+        // catalogUrl: "/api/products",
+        // products: [],
+        // filtered: [],
     },
 
     methods: {
@@ -62,18 +62,18 @@ let app = new Vue({
         }
     },
 
-    mounted(){
-        this.getJson(this.catalogUrl)
-            .then(data => {
-                for(let el of data){
-                    if(el.featured){
-
-                        this.products.push(el);
-                        this.filtered.push(el);
-                    }
-                }
-            });
-    },
+    // mounted(){
+    //     this.getJson(this.catalogUrl)
+    //         .then(data => {
+    //             for(let el of data){
+    //                 if(el.featured){
+    //
+    //                     this.products.push(el);
+    //                     this.filtered.push(el);
+    //                 }
+    //             }
+    //         });
+    // },
     template: `
     <div>
         <header class="header">
@@ -89,7 +89,7 @@ let app = new Vue({
                     <div class="header-right header-flex">
                         <input type="checkbox" id="cart-chb-c">
                         
-                        <united_cart >
+                        <united_cart ref="cartcont">
 
                         </united_cart>
 
@@ -557,59 +557,9 @@ let app = new Vue({
                     </div>
                 </div>
             </main>
-            <div class="features">
-                <article class="container features-item">
-                    <div class="feature-header">
-                        <h2 class="feature-header-text-up">Featured Items</h2>
-                        <p class="features-header-text-down">Shop for items based on what we featured in this week</p>
-                    </div>
-                    <div class="box-product">
-                        <div class="product-flex"
-                             v-for="product of filtered" :key="product.id_product">
-                            <a href="pages/single.html" class="poduct">
-                                <img class="product-img" :src="product.img" alt="">
-                                <div class="product-text">
-                                    <p class="product-name">
-                                        {{ product.product_name }}
-                                    </p>
-                                    <p class="product-price pink">
-                                       \${{ product.price }}
-                                    </p>
-                                </div>
-                            </a>
-                            <div class="add-position">
-                                <a href="#" class="add" @click.prevent="$root.$refs.cartcont.addProduct(product)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         width="23" height="22" viewBox="0 0 32 29">
-                                        <defs>
-                                            <path id="cart-add-svg8" class="cart-add-svg" d="M1181 41.182c0-.65.533-1.182 1.184-1.182h4.28c.533 0
-                                    1.007.354 1.145.867l4.833 17.455h13.178l4.379-10.048H1195.4a1.186 1.186 0
-                                    0 1-1.184-1.182c0-.65.533-1.182 1.184-1.182h16.413c.394 0 .77.197.986.532.217.335.257.749.099
-                                    1.123l-5.405 12.412c-.198.433-.612.709-1.085.709h-14.855a1.184 1.184 0 0
-                                    1-1.144-.867l-4.833-17.455h-3.393a1.186 1.186 0 0 1-1.184-1.182zm6.747 25.138a2.684
-                                    2.684 0 0 1 5.365 0 2.684 2.684 0 0 1-5.365 0zm16.788.178c-.1-1.458 1.006-2.758 2.485-2.857
-                                    1.48-.098 2.762 1.025 2.86 2.483.04.728-.177 1.418-.65 1.95a2.678 2.678 0 0
-                                    1-1.835.926h-.197c-1.401 0-2.565-1.103-2.663-2.502z"/>
-                                        </defs>
-                                        <g>
-                                            <g transform="translate(-1181 -40)">
-                                                <use fill="#222" xlink:href="#cart-add-svg8"/>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                    Add to Cart
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="features-button">
-                        <a href="pages/product.html" class="features-button-link bover-w">
-                            Browse All Product <i class=" fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
-            </div>
+            <featured_items class="features" ref="featured">
+            
+            </featured_items>
     </div> 
     `
 });
