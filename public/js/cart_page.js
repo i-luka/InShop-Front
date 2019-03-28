@@ -50,7 +50,7 @@ let app = new Vue({
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(data)
+                //body: JSON.stringify(data)
             })
                 .then(result => result.json())
                 .catch(error => {
@@ -63,20 +63,6 @@ let app = new Vue({
             let regexp = new RegExp(searchLine, 'i');
             this.filtered = this.products.filter(el => regexp.test(el.product_name));
         },
-        // clearCart() {
-        //
-        //     this.refs.cartcont.cartItems.forEach((el) => {
-        //
-        //         this.delJson(`/api/cart/${el.id_product}`)
-        //             .then(data => {
-        //                 if (data.result === 1) {
-        //
-        //                     let index = this.refs.cartcont.cartItems.indexOf(el);
-        //                     this.refs.cartcont.cartItems.splice(index, 1);
-        //                 }
-        //             });
-        //     })
-        // }
     },
 
     mounted(){

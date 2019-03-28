@@ -63,22 +63,28 @@ Vue.component("united_cart",{
                         }
                     })
             }
-        }
+        },
+        clearCart() {
+
+            let res= this.cartItems.slice(0);
+            for(let i = 0; i < res.length; i++){
+
+                let id = (res[i]).id_product;
+                this.$parent.delJson(`/api/cart/${id}`)
+                    .then(data => {
+                        if (data.result === 1) {
+
+                            console.log(`id ${id} `);
+                            let index = this.cartItems.findIndex(x=>x.id_product===id);
+                            this.cartItems.splice(index,1);
+                            this.cartItems.forEach(x=> console.log(`x ${x} `));
+                            this.goodsCount--;
+                        }
+                    });
+            }
+        },
     },
-    clearCart() {
 
-        this.cartItems.forEach((el) => {
-
-            this.delJson(`/api/cart/${el.id_product}`)
-                .then(data => {
-                    if (data.result === 1) {
-
-                        let index = this.cartItems.indexOf(el);
-                        this.cartItems.splice(index, 1);
-                    }
-                });
-        })
-    },
     mounted(){
 
         this.$parent.getJson(this.cartUrl)

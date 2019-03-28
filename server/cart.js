@@ -13,15 +13,11 @@ let change = (cart, req) => {
 let deleteItem = (cart, req) => {
 
     let index = cart.contents.findIndex(el => el.id_product === +req.params.id);
-
-    // if(cart.contents[index].quantity === 1){
-
         cart.contents.splice(index, 1);
         cart.countGoods--;
-    // }else{
-    //
-    //     cart.contents[index].quantity--;
-    // }
+
+    console.log(index);
+    cart.contents.forEach(x=>console.log(x.id_product));
     return JSON.stringify(cart, null, 4);
 };
 
