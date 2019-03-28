@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "nodemonConfig": {
-    "ignor": ["*.json"]
+    "ignor": [
+      "*.json"
+    ]
   },
   "dependencies": {
     "express": "^4.16.4"

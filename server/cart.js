@@ -18,11 +18,20 @@ let deleteItem = (cart, req) => {
 
     console.log(index);
     cart.contents.forEach(x=>console.log(x.id_product));
+
+    return JSON.stringify(cart, null, 4);
+};
+let deleteAll = (cart, req) => {
+
+    cart.contents = [];
+    cart.countGoods = 0;
+    console.log("DELETE+++++++++++++++++++++++++++++++++++++++++++++");
     return JSON.stringify(cart, null, 4);
 };
 
 module.exports = {
     add,
     change,
-    deleteItem
+    deleteItem,
+    deleteAll
 };
