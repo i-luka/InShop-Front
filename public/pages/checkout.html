@@ -7,9 +7,30 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
-<div id="checkout">
+<div id="main_app">
+<header class="header">
+    <div class="container header-flex">
+        <div class="header-left header-flex">
+            <a href="../index.html" class="logo header-flex"><img class="logo-img" src="../img/logo.png" alt="" >
+                <p class="header-text">bran<span class="pink">D</span></p></a>
+            <searchform>
 
-</div>
+            </searchform>
+        </div>
+
+        <div class="header-right header-flex">
+            <input type="checkbox" id="cart-chb-c">
+
+            <united_cart >
+
+            </united_cart>
+
+            <a href="#" class="button bover-w">
+                My Account <i class="acc-tr fas fa-caret-down"></i>
+            </a>
+        </div>
+    </div>
+</header>
 <nav class="navigation">
     <div class="container">
         <ul class="menu">
@@ -686,12 +707,13 @@
         </div>
     </div>
 </footer>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="../js/search-form.js"></script>
 <script src="../js/cart.js"></script>
 <script src="../js/cartcontainer.js"></script>
 <script src="../js/unitedCart.js"></script>
-<script src="../js/checkout.js"></script>
+<script src="../js/main.js"></script>
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </body>
 </html>
