@@ -143,7 +143,8 @@ Vue.component("cartitem",{
                      </p>
                 </div>
                 <div class="cart-item">
-                    <input type="number" name="product-quantity" id="cart-product-quantity1" v-model.number="item.quantity" class="cart-font">
+                    <input type="number" name="product-quantity" id="cart-product-quantity1" 
+                            v-model.number="item.quantity" class="cart-font" min="1">
                 </div>
                 <div class="cart-item">
                      <p>

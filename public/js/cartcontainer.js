@@ -3,10 +3,6 @@ Vue.component("cartcont",{
     props: ['cartItems', 'amount', 'goodsCount'],
     data(){
         return {
-            //
-            // cartUrl: '/api/cart',
-            // amount: 0,
-            // goodsCount: 0,
             showCart: false,
         }
     },

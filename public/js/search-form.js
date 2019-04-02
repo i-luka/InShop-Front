@@ -11,7 +11,6 @@ Vue.component('searchform',{
             document.forms["searchform"].searchform_input.style.border = "1px solid  #f16d7f";
             document.forms["searchform"].searchform_btn.style.border = "1px solid  #f16d7f";
             document.forms["searchform"].searchform_btn.style.borderLeft = "1px none  #f16d7f";
-            // document.forms["searchform"].searchform_icon.style.color = "#f16d7f";
             document.forms["searchform"].searchform_input.style.borderLeft = "1px none  #f16d7f";
 
         },
@@ -22,7 +21,6 @@ Vue.component('searchform',{
             document.forms["searchform"].searchform_btn.style.border = "1px solid  #e6e6e6";
             document.forms["searchform"].searchform_btn.style.borderLeft = "1px none  #f16d7f";
             document.forms["searchform"].searchform_input.style.borderLeft = "1px none  #f16d7f";
-            // document.forms["searchform"].searchform_icon.style.color = "#e6e6e6";
         }
 
     },
@@ -76,16 +74,8 @@ Vue.component('searchform',{
                         @mouseover="search_btn_mouseover"
                         @mouseleave="search_btn_mouseleave"
                         name="searchform_btn">
-                <i class="br-sm fas fa-search" name="searchform_icon"></i>
+                    <i class="br-sm fas fa-search" name="searchform_icon"></i>
                 </button>
-               
-                <!--<input type="text" class="search-field" v-model="searchLine">-->
-
-                <!--<button class="btn-search" type="submit" @click.prevent="$parent.$parent.$refs.products.filter(searchLine)">-->
-
-                    <!--<i class="fas fa-search"></i>-->
-
-                <!--</button>-->
 
         </form>`
 })

@@ -3,7 +3,6 @@ Vue.component("cart",{
     props: ['cart_item'],
     data(){
         return {
-            imgCart: 'https://placehold.it/50x100',
         }
     },
     template: `
