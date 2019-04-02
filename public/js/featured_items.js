@@ -12,14 +12,10 @@ Vue.component("featured_items", {
 
     },
     mounted(){
+
         this.$parent.getJson(this.catalogUrl)
             .then(data => {
-                // for(let el of data){
-                //     if(el.featured){
-
-                        this.featured = data.filter(el => el.featured === "true");
-                //     }
-                // }
+                this.featured = data.filter(el => el.featured === "true");
             });
     },
     template: `
@@ -47,4 +43,4 @@ Vue.component("featured_items", {
                 </article>
             </div>
     `
-})
+});
